@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<ruleset id="custom-webapp" xmlns="http://windup.jboss.org/schema/jboss-ruleset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://windup.jboss.org/schema/jboss-ruleset http://windup.jboss.org/schema/jboss-ruleset/windup-jboss-ruleset.xsd">
+    <metadata>
+        <description>
+            Custom ruleset
+        </description>
+        <targetTechnology id="custom-next"/>
+    </metadata>
+    <rules>
+        <rule id="custom-next-00">
+            <when>
+                <javaclass references="com.custom.app.Custom">
+                    <location>IMPORT</location>
+                </javaclass>
+            </when>
+            <perform>
+                <hint title="Replace Quickfix (import)" effort="0" category-id="optional">
+                    <message>Replace with : org.kie.api.KieBase</message>
+                    <link title="Java EE 6 TimerService API" href="http://docs.oracle.com/javaee/6/api/javax/ejb/Timer.html"/>
+                    <quickfix name="custom-next-base" type="REPLACE">
+                        <replacement>com.custom.app.CustomNext</replacement>
+                        <search>com.custom.app.Custom</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <rule id="custom-next-01">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="com.custom.app.Custom">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Proprietary Ref" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with @CustomNext
+                    </message>
+                    <link href="https://www.redhat.com" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next" type="REPLACE">
+                        <replacement>CustomNext</replacement>
+                        <search>Custom</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <rule id="custom-next-02">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="com.custom.app.CustomFilter">
+                    <location>IMPLEMENTS_TYPE</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Proprietary Interface" effort="3" category-id="potential">
+                    <message>
+                        Replace CustomFilter with CustomNextFilter
+                    </message>
+                    <link href="https://www.redhat.com" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next" type="REPLACE">
+                        <replacement>CustomNextFilter</replacement>
+                        <search>CustomFilter</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <rule id="custom-next-03">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="com.custom.app.Init">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Proprietary Annotation" effort="3" category-id="potential">
+                    <message>
+                        Replace Init with InitNext
+                    </message>
+                    <link href="https://www.redhat.com" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next" type="REPLACE">
+                        <replacement>InitNext</replacement>
+                        <search>Init</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <rule id="custom-webapp-02">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="com.custom.app.CustomParam">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Proprietary Ref" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with @CustomParamNext
+                    </message>
+                    <link href="https://" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next-param" type="REPLACE">
+                        <replacement>CustomParamNext</replacement>
+                        <search>CustomParam</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <rule id="custom-webapp-03">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <filecontent filename="{*}.{ext}" pattern="{badString}" />
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Bad String" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with goodString
+                    </message>
+                    <link href="https://" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next-param" type="REPLACE">
+                        <replacement>goodString</replacement>
+                        <search>badString</search>
+                    </quickfix>
+                </hint>
+            </perform>
+            <where param="ext">
+                <matches pattern="(properties)" />
+            </where>
+            <where param="badString">
+                <matches pattern="badString?" />
+            </where>
+        </rule>
+        <rule id="custom-webapp-04">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="weblogic.servlet.annotation.WLFilter">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Delete Quickfix" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with @CustomNext
+                    </message>
+                    <link href="https://" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next-annotation-delete" type="DELETE_LINE">
+                        <replacement>CustomNext</replacement>
+                        <search>WLFilter</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+        <!-- <rule id="custom-webapp-05">
+            <when>
+                <javaclass references="weblogic.servlet.annotation.WLFilter">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <perform>
+                <hint issue-display-mode="all" title="Insert Quickfix" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with @CustomNext
+                    </message>
+                    <link href="https://" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next-annotation-insert" type="INSERT_LINE">
+                        <search>WLFilter</search>
+                        <newline>This is a test</newline>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule> -->
+        <rule id="custom-webapp-06">
+            <!-- rule condition, when it could be fired -->
+            <when>
+                <javaclass references="weblogic.servlet.annotation.WLFilter">
+                    <location>ANNOTATION</location>
+                </javaclass>
+            </when>
+            <!-- rule operation, what to do if it is fired -->
+            <perform>
+                <hint issue-display-mode="all" title="Replace Quickfix" effort="3" category-id="mandatory">
+                    <message>
+                        Replace with @CustomNext
+                    </message>
+                    <link href="https://" title="Knowledge base article about " />
+                    <tag>custom-next</tag>
+                    <quickfix name="custom-next-annotation-replace" type="REPLACE">
+                        <replacement>WebFilter</replacement>
+                        <search>WLFilter</search>
+                    </quickfix>
+                </hint>
+            </perform>
+        </rule>
+    </rules>
+</ruleset>
